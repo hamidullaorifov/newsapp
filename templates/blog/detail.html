@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+<div class="post-picture">
+    <img src="{{post.picture}}" alt="Post picture">
+</div>
+
+<div class="post-content">
+    <p>{{ post.body|linebreaks }}</p>
+</div>
+
+<div class="similar-posts">
+    {% for post in similar_posts %}
+       <p><a href="{{post.get_absolute_url }}">{{post.title}}</a></p>
+    {% empty %}
+        There are no similar posts yet.
+    {% endfor %}
+
+    <div class="comments">
+    {% for comment in comments %}
+        <p>{{comment.body}}</p>
+    {% empty %}
+        There are no comments yet.
+    {% endfor %}
+    <div class="comment-form">
+        {% if new_comment %}
+        <h2>Your comment has been added.</h2>
+        {% else %}
+        <h2>Add a new comment</h2>
+        <form method="post">
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add comment"></p>
+        </form>
+        {% endif %}
+    </div>
+    </div>
+</div>
+{% endblock %}

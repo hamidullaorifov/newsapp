@@ -1,0 +1,9 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+<form class="form-control" method="POST">
+    {% csrf_token %}
+    <h4>Are you sure?</h4>
+    <a href="{% url 'accounts:index' %}" class="btn btn-primary"">Cancel</a>
+    <button class="btn btn-danger" type="submit">Yes</button>
+</form>
+{% endblock %}

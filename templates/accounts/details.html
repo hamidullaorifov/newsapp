@@ -1,0 +1,13 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+<div class="post-picture">
+    <img src="{{post.picture}}" alt="Post picture">
+</div>
+
+<div class="post-content">
+    <p>{{ post.body|linebreaks }}</p>
+</div>
+<a href="{{ post.get_update_url }}" class="btn btn-primary m-2">Update</a>
+<a href="{{ post.get_delete_url }}" class="btn btn-danger m-2">Delete</a>
+
+{% endblock %}

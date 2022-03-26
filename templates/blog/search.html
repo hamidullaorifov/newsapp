@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+{% if query %}
+<h1>Posts containing {{query}}</h1>
+<h3>Found {{results.count}} results</h3>
+{% include 'blog/list.html' with posts=results %}
+<!-- {% include 'blog/pagination.html' with posts=results %} -->
+{% endif %}
+{% endblock %}

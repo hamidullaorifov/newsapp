@@ -1,0 +1,18 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleInputUsername">Username</label>
+      <input type="text" class="form-control" id="id_username" placeholder="Username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="id_email" placeholder="Password" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

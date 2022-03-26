@@ -1,0 +1,249 @@
+  {% extends 'blog/base.html' %}
+  {% load static %}
+  {% block content %}
+  <section id="newsSection">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="latest_newsarea"> <span>Latest News</span>
+          <ul id="ticker01" class="news_sticker">
+            {% for latestpost in latest %}
+              <li><a href="{{ latestpost.get_absolute_url }}"><img src="{{latestpost.picture}}" alt="">{{latestpost.title}}</a></li>
+            {% endfor %}
+            
+          </ul>
+          <div class="social_area">
+            <ul class="social_nav">
+              <li class="facebook"><a href="#"></a></li>
+              <li class="twitter"><a href="#"></a></li>
+              <li class="flickr"><a href="#"></a></li>
+              <li class="pinterest"><a href="#"></a></li>
+              <li class="googleplus"><a href="#"></a></li>
+              <li class="vimeo"><a href="#"></a></li>
+              <li class="youtube"><a href="#"></a></li>
+              <li class="mail"><a href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="sliderSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="slick_slider">
+          {% for latestpost in latest %}
+          <div class="single_iteam"> <a href="{{ latestpost.get_absolute_url }}"> <img src="{{latestpost.picture}}" alt="Post picture" class="d-block w-100"></a>
+            <div class="slider_article">
+              <h2><a class="slider_tittle" href="{{ latestpost.get_absolute_url }}">{{ latestpost.title }}</a></h2>
+              <p>{{ latestpost.body|truncatewords:20|linebreaks }} </p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="latest_post">
+          <h2><span>Latest post</span></h2>
+          <div class="latest_post_container">
+            <div id="prev-button"><i class="fa fa-chevron-up"></i></div>
+            <ul class="latest_postnav">
+
+              {% for latestpost in latest %}
+              <li>
+                <div class="media"> <a href="{{ latestpost.get_absolute_url }}" class="media-left"> 
+                  <!-- <img alt="" src="{{ latestpost.picture }}"> -->
+                 </a>
+                  <div class="media-body"> <a href="{{ latestpost.get_absolute_url }}" class="catg_title">{{ latestpost.title }}</a> </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+            <div id="next-button"><i class="fa  fa-chevron-down"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contentSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="left_content">
+          <div class="single_post_content">
+            <h2><span>JAHON</span></h2>
+            <div class="single_post_content_left">
+              <ul class="business_catgnav  wow fadeInDown">
+                {% for post in world|slice:1 %}
+                <li>
+                  <figure class="bsbig_fig"> <a href="{{ post.get_absolute_url }}" class="featured_img"> <img alt="" src="{{ post.picture }}"> <span class="overlay"></span> </a>
+                    <figcaption> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> </figcaption>
+                    <p>{{ post.body|truncatewords:20|linebreaks }}</p>
+                  </figure>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="single_post_content_right">
+              <ul class="spost_nav">
+                {% for post in world %}
+                <li>
+                  <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.picture }}"> </a>
+                    <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title">{{ post.title }}</a> </div>
+                  </div>
+                </li>
+               
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div class="fashion_technology_area">
+            <div class="fashion">
+              <div class="single_post_content">
+                <h2><span>O'ZBEKISTON</span></h2>
+                <ul class="business_catgnav wow fadeInDown">
+                  {% for post in uzb|slice:1 %}
+                <li>
+                  <figure class="bsbig_fig"> <a href="{{ post.get_absolute_url }}" class="featured_img"> <img alt="" src="{{ post.picture }}"> <span class="overlay"></span> </a>
+                    <figcaption> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> </figcaption>
+                    <p>{{ post.body|truncatewords:20|linebreaks }}</p>
+                  </figure>
+                </li>
+                {% endfor %}
+                </ul>
+                <ul class="spost_nav">
+                  {% for post in uzb %}
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.picture }}"> </a>
+                      <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title">{{ post.title }}</a> </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="technology">
+              <div class="single_post_content">
+                <h2><span>IQTISODIYOT</span></h2>
+                <ul class="business_catgnav">
+                  {% for post in economy|slice:1 %}
+                    <li>
+                      <figure class="bsbig_fig"> <a href="{{ post.get_absolute_url }}" class="featured_img"> <img alt="" src="{{ post.picture }}"> <span class="overlay"></span> </a>
+                        <figcaption> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> </figcaption>
+                        <p>{{ post.body|truncatewords:20|linebreaks }}</p>
+                      </figure>
+                    </li>
+                {% endfor %}
+                </ul>
+                <ul class="spost_nav">
+                  {% for post in economy %}
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.picture }}"> </a>
+                      <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title">{{ post.title }}</a> </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="fashion_technology_area">
+            <div class="fashion">
+              <div class="single_post_content">
+                <h2><span>SHOU BIZNES</span></h2>
+                <ul class="business_catgnav wow fadeInDown">
+                  {% for post in shou|slice:1 %}
+                    <li>
+                      <figure class="bsbig_fig"> <a href="{{ post.get_absolute_url }}" class="featured_img"> <img alt="" src="{{ post.picture }}"> <span class="overlay"></span> </a>
+                        <figcaption> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> </figcaption>
+                        <p>{{ post.body|truncatewords:20|linebreaks }}</p>
+                      </figure>
+                    </li>
+                  {% endfor %}
+                </ul>
+                <ul class="spost_nav">
+                  {% for post in shou %}
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.picture }}"> </a>
+                      <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title">{{ post.title }}</a> </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                  
+                </ul>
+              </div>
+            </div>
+            <div class="technology">
+              <div class="single_post_content">
+                <h2><span>FAN-TEXNIKA</span></h2>
+                <ul class="business_catgnav">
+                  {% for post in science|slice:1 %}
+                    <li>
+                      <figure class="bsbig_fig"> <a href="{{ post.get_absolute_url }}" class="featured_img"> <img alt="" src="{{ post.picture }}"> <span class="overlay"></span> </a>
+                        <figcaption> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> </figcaption>
+                        <p>{{ post.body|truncatewords:20|linebreaks }}</p>
+                      </figure>
+                    </li>
+                  {% endfor %}
+                  
+                </ul>
+                <ul class="spost_nav">
+                  {% for post in science %}
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.picture }}"> </a>
+                      <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title">{{ post.title }}</a> </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="single_post_content">
+            <h2><span>SPORT</span></h2>
+            <div class="single_post_content_left">
+              <ul class="business_catgnav">
+                {% for post in sport|slice:1 %}
+                    <li>
+                      <figure class="bsbig_fig"> <a href="{{ post.get_absolute_url }}" class="featured_img"> <img alt="" src="{{ post.picture }}"> <span class="overlay"></span> </a>
+                        <figcaption> <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> </figcaption>
+                        <p>{{ post.body|truncatewords:20|linebreaks }}</p>
+                      </figure>
+                    </li>
+                  {% endfor %}
+              </ul>
+            </div>
+            <div class="single_post_content_right">
+              <ul class="spost_nav">
+                {% for post in sport %}
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.picture }}"> </a>
+                      <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title">{{ post.title }}</a> </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        <aside class="right_content">
+          <div class="single_sidebar">
+            <h2><span>Popular Post</span></h2>
+            <ul class="spost_nav">
+              {% for post in popular %}
+                <li>
+                  <div class="media wow fadeInDown"> <a href="{{ post.get_absolute_url }}" class="media-left"> <img alt="" src="{{ post.picture }}"> </a>
+                    <div class="media-body"> <a href="{{ post.get_absolute_url }}" class="catg_title"> {{ post.title }}</a> </div>
+                  </div>
+                </li>
+                {% endfor %}
+              
+            </ul>
+          </div>
+          </aside>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
