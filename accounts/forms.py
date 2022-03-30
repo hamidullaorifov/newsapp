@@ -28,6 +28,4 @@ class PostForm(forms.ModelForm):
             'category':forms.Select(attrs={'class':'form-control',}),
             'status':forms.Select(attrs={'class':'form-control',}),
             'tags':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter comma separated lis of tags'})}
-    # tags = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter comma separated lis of tags'}),validators=[tags_validator])
-
 

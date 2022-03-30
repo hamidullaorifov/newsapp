@@ -3,21 +3,14 @@
 {% block content %}
 
 <table class="table caption-top">
-    <caption>List of users</caption>
-    <!-- <thead>
-      <tr>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead> -->
+    <caption>List of posts</caption>
     <tbody>
     {% for post in posts %}
       <tr>
         <th scope="row">{{forloop.counter}}</th>
         <td>{{post.title}}</td>
         <td>
-          <!-- <a href="#" class="btn btn-primary m-2">Update</a>
-          <a href="#" class="btn btn-danger m-2">Delete</a> -->
+          
             <div class="row">
                 <div class="col-6">
                   <a href="{{ post.get_update_url }}" class="btn btn-primary m-2">Update</a>

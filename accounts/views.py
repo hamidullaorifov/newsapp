@@ -42,18 +42,17 @@ def update(request,id):
     tags = ''
     for tag in post.tags.all():
         tags+=str(tag)+','
-    # print(tags)
-    # print(dir(form.fields['tags']))
-    # form.fields['tags'].initial = tags
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = user
+            post.title = request.POST['title']
+            post.body = request.POST['body']
+            post.picture = request.POST['picture']
+            post.category = request.POST['category']
+            post.status = request.POST['status']
             post.save()
             for tag in request.POST['tags'].split(','):
                 post.tags.add(tag)
-            post.save()
             return redirect('accounts:detail',id=post.id)
     return render(request,'accounts/update.html',{'form':form,'tags':tags})
 
@@ -83,8 +82,7 @@ def register(request):
             if password1==password2:
                 form.save()
                 return redirect('accounts:login')
-            # else:
-            #     raise ValidationError('Password doesn\'t match')
+            
     return render(request,'accounts/register.html',{'form':form})
 
 

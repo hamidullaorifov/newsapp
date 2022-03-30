@@ -19,10 +19,6 @@ class DraftManager(models.Manager):
 
 ###################################################
 
-# def tags_validator(value):
-#     for tag in value.split(","):
-#         if not tag.isalpha():
-#             raise models.ValidationError('Tags field must contain only letters,commas')
 
 class Post(models.Model):
     STATUS_CHOICE = (
@@ -55,11 +51,6 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
-    # def tag_list(self):
-    #     tags=''
-    #     for tag in self.tags.all():
-    #         tags+=str(tag)+','
-    #     return tags
     
 
 

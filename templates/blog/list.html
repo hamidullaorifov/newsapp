@@ -1,19 +1,30 @@
 
-    {% for post in posts %}
-    <a href="{{post.get_absolute_url}}">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <!-- <img src="{{post.picture}}" class="img-fluid rounded-start" alt="..."> -->
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{post.title}}</h5>
-              <p class="card-text">{{post.body|truncatewords:20|linebreaks}}</p>
-            </div>
-          </div>
-        </div>
-    </div>
-    </a>
-    {% endfor %}
+    <section class="section-last-news container"> 
+      <div class="ln">
+        
+          {% for post in posts %}
+          <a href="{{post.get_absolute_url}}" class="ln-item">
+              <img src="{{post.picture}}" height="143" width="252" alt="">
+              <div class="ln-text">
+                  <div class="ln-text-title">
+                      {{ post.title }}
+                  </div>
+                  <div class="ln-title-desc">
+                      {{post.body|truncatewords:20}}
+                  </div>
+                  <div class="ln-title-time">
+                      <img src="./resourse/ln-time-icon-calendar.svg" alt="">
+                      {{post.publish}}
+                  </div>
+              </div>
+          </a>
+          {% endfor %}
+      </div>
+    
+    
+      
+      
+    </section>
+    
+    
     

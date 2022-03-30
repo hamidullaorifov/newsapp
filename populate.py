@@ -50,8 +50,7 @@ def add_tags():
             tag = random.choice(tags)
             post.tags.add(tag)
             post.save()
-            # curr_tags=curr_tags+(tag,)
-        # post.tags.add(curr_tags)
+            
     
 if __name__=='__main__':
     print('Populating....')

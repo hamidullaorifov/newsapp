@@ -8,33 +8,27 @@ from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from .forms import CommentForm,SearchForm
 # Create your views here.
 
-def index(request):
-    uzb = get_list_or_404(Post,status='published',category='uzb')[:4]
-    world = get_list_or_404(Post,status='published',category='world')[:4]
-    economy = get_list_or_404(Post,status='published',category='economy')[:4]
-    sport = get_list_or_404(Post,status='published',category='sport')[:4]
-    science = get_list_or_404(Post,status='published',category='science')[:4]
-    shou = get_list_or_404(Post,status='published',category='shou')[:4]
-    latest = get_list_or_404(Post,status='published')[:20]
+def index(request,category=None):
+    if category is None:
+        posts = get_list_or_404(Post,status='published')[:6]
+    else:
+        posts = get_list_or_404(Post,status='published',category=category)[:6]
 
-    lastweek = timezone.now() - datetime.timedelta(days=7)
+    latest = get_list_or_404(Post,status='published')[:6]
+
+    lastdecade = timezone.now() - datetime.timedelta(days=10)
     
-    popular = Post.objects.filter(status='published',publish__gt=lastweek).annotate(num_comments=Count('comments')).order_by('num_comments')[:8]
+    popular = Post.objects.filter(status='published',publish__gt=lastdecade).annotate(num_comments=Count('comments')).order_by('-num_comments')[:6]
     
-
-
 
     context = {
-        'uzb':uzb,
-        'world':world,
-        'economy':economy,
-        'sport':sport,
-        'science':science,
-        'shou':shou,
+        'posts':posts,
         'latest':latest,
-        'popular':popular,
-        
+        'popular':popular,    
     }
+
+
+    
     return render(request,'blog/index.html',context)
 
 
@@ -53,7 +47,8 @@ def post_detail(request,post):
         comment_form = CommentForm()
     comments = post.comments.filter(active=True)
 
-    similar_posts = post.tags.similar_objects()[:4]
+    similar_posts = post.tags.similar_objects()[:5]
+    
 
     context = {
         'post': post,
@@ -95,12 +90,10 @@ def search(request):
     results = []
 
     if 'query' in request.GET:
-        form = SearchForm(request.GET)
-        if form.is_valid():
-            query = form.cleaned_data['query']
-            search_vector = SearchVector('title',weight = 'A')+SearchVector('body',weight = 'B')
-            search_query = SearchQuery(query)
-            results = Post.published.annotate(
+        query = request.GET.get('query')
+        search_vector = SearchVector('title',weight = 'A')+SearchVector('body',weight = 'B')
+        search_query = SearchQuery(query)
+        results = Post.published.annotate(
                 rank = SearchRank(search_vector,search_query)).filter(rank__gt=0.3).order_by('-rank')
     
     
